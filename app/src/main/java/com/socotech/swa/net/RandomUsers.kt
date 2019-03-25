@@ -4,13 +4,15 @@ package com.socotech.swa.net
 //
 //   val randomUsers = RandomUsers.fromJson(jsonString)
 
+import android.os.Parcelable
 import com.beust.klaxon.Klaxon
+import kotlinx.android.parcel.Parcelize
 
 private val klaxon = Klaxon()
 
 data class RandomUsers(
     val info: Info,
-    val results: List<Result>
+    val results: List<RandomUser>
 ) {
     fun toJson() = klaxon.toJsonString(this)
 
@@ -20,74 +22,83 @@ data class RandomUsers(
 }
 
 data class Info(
+    val page: Long,
     val seed: String,
     val results: Long,
-    val page: Long,
     val version: String
 )
 
-data class Result(
-    val gender: String,
+@Parcelize
+data class RandomUser(
+    val id: ID,
+    val dob: Dob,
+    val nat: String,
+    val cell: String,
     val name: Name,
-    val location: Location,
     val email: String,
     val login: Login,
-    val dob: Dob,
-    val registered: Dob,
     val phone: String,
-    val cell: String,
-    val id: ID,
+    val gender: String,
     val picture: Picture,
-    val nat: String
-)
+    val location: Location,
+    val registered: Dob
+) : Parcelable
 
+@Parcelize
 data class Dob(
-    val date: String,
-    val age: Long
-)
+    val age: Long,
+    val date: String
+) : Parcelable
 
+@Parcelize
 data class ID(
     val name: String,
     val value: String
-)
+) : Parcelable
 
+@Parcelize
 data class Location(
-    val street: String,
     val city: String,
     val state: String,
+    val street: String,
     val postcode: String,
-    val coordinates: Coordinates,
-    val timezone: Timezone
-)
+    val timezone: Timezone,
+    val coordinates: Coordinates
+) : Parcelable
 
+@Parcelize
 data class Coordinates(
     val latitude: String,
     val longitude: String
-)
+) : Parcelable
 
+@Parcelize
 data class Timezone(
     val offset: String,
     val description: String
-)
+) : Parcelable
 
+@Parcelize
 data class Login(
-    val uuid: String,
-    val username: String,
-    val password: String,
-    val salt: String,
     val md5: String,
     val sha1: String,
-    val sha256: String
-)
+    val salt: String,
+    val uuid: String,
+    val sha256: String,
+    val username: String,
+    val password: String
+) : Parcelable
 
+@Parcelize
 data class Name(
-    val title: String,
+    val last: String,
     val first: String,
-    val last: String
-)
+    val title: String
+) : Parcelable
 
+@Parcelize
 data class Picture(
     val large: String,
     val medium: String,
     val thumbnail: String
-)
+) : Parcelable

@@ -1,21 +1,23 @@
 package com.socotech.swa
 
+import android.content.Intent
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.socotech.swa.net.Result
+import com.socotech.swa.net.RandomUser
 import com.socotech.swa.util.CircleTransformation
 import com.squareup.picasso.Picasso
 
 
 class FeedAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var results: ArrayList<Result> = ArrayList()
+    private var results: ArrayList<RandomUser> = ArrayList()
 
-    fun add(t: Result) {
+    fun add(t: RandomUser) {
         results.add(t)
     }
 
@@ -48,7 +50,12 @@ class FeedAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return if (this.getItemViewType(viewType) == ViewType.Result.ordinal) {
             // create a new view
             val v = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
-            // v.setOnClickListener({ view -> val c = view.context })
+            v.setOnClickListener {
+                val ctx = it?.context
+                val intent = Intent(ctx, DetailActivity::class.java)
+                intent.putExtra("user", it?.tag as Parcelable)
+                ctx?.startActivity(intent)
+            }
             // set the view's size, margins, paddings and layout parameters
             ResultViewHolder(v)
         } else {
@@ -64,6 +71,7 @@ class FeedAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             val lastName = result.name.last
             val firstName = result.name.first
             holder.name?.text = "$firstName $lastName"
+            holder.itemView.tag = result
             Picasso.get().load(result.picture.large).transform(CircleTransformation()).into(holder.avatar)
         } else if (holder is FooterViewHolder) {
             // noop

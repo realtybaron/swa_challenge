@@ -24,7 +24,7 @@ public class ApiEndpointTest {
 
     @Test
     public void testGet() {
-        TestObserver<Response<RandomUsers>> observable = randomUserApi.get(1, 100).test();
+        TestObserver<Response<RandomUsers>> observable = randomUserApi.get("us", 1, "swa_challenge", 100).test();
         observable.assertNoErrors();
     }
 
