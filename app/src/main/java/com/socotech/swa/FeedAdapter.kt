@@ -1,7 +1,5 @@
 package com.socotech.swa
 
-import android.content.Intent
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +11,9 @@ import com.socotech.swa.util.CircleTransformation
 import com.squareup.picasso.Picasso
 
 
-class FeedAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FeedAdapter(onclick: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private var onclick = onclick
     private var results: ArrayList<RandomUser> = ArrayList()
 
     fun add(t: RandomUser) {
@@ -50,12 +49,7 @@ class FeedAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return if (this.getItemViewType(viewType) == ViewType.Result.ordinal) {
             // create a new view
             val v = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
-            v.setOnClickListener {
-                val ctx = it?.context
-                val intent = Intent(ctx, DetailActivity::class.java)
-                intent.putExtra("user", it?.tag as Parcelable)
-                ctx?.startActivity(intent)
-            }
+            v.setOnClickListener(onclick)
             // set the view's size, margins, paddings and layout parameters
             ResultViewHolder(v)
         } else {

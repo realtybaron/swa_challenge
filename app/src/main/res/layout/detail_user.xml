@@ -29,7 +29,8 @@
                       android:textStyle="bold"
                       android:textColor="@android:color/white"
                       android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"/>
+                      android:layout_height="wrap_content"
+                      android:transitionName="name"/>
 
             <TextView tools:text="Flight Attendant"
                       android:id="@+id/title"
@@ -54,6 +55,7 @@
     <ImageView android:id="@+id/avatar"
                android:layout_width="100dp"
                android:layout_height="100dp"
-               android:layout_centerHorizontal="true"/>
+               android:layout_centerHorizontal="true"
+               android:transitionName="avatar"/>
 
 </RelativeLayout>

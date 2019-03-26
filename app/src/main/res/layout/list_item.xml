@@ -11,11 +11,13 @@
                android:layout_width="0dp"
                android:layout_weight="20"
                android:layout_height="match_parent"
-               android:layout_gravity="center"/>
+               android:layout_gravity="center"
+               android:transitionName="avatar"/>
 
     <TextView android:id="@+id/name"
               android:layout_width="0dp"
               android:layout_weight="80"
-              android:layout_height="match_parent"/>
+              android:layout_height="match_parent"
+              android:transitionName="name"/>
 
 </LinearLayout>

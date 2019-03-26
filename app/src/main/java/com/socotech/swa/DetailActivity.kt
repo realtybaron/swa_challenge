@@ -15,7 +15,11 @@ class DetailActivity : AppCompatActivity() {
         super.setContentView(R.layout.detail_user)
         // get user
         val result = intent?.extras?.getParcelable("user") as RandomUser
-        // set views
+        // set name
+        val lastName = result.name.last
+        val firstName = result.name.first
+        name?.text = "$firstName $lastName"
+        // set avatar
         Picasso.get().load(result.picture.large).transform(CircleTransformation()).into(avatar)
     }
 

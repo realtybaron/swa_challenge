@@ -1,8 +1,12 @@
 package com.socotech.swa
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,8 +14,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.snackbar.Snackbar
 import com.socotech.swa.net.RandomUsers
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.list_item.view.*
 import javax.inject.Inject
 
 
@@ -31,8 +35,6 @@ class FeedActivity : AppCompatActivity(), FeedContract.View, SwipeRefreshLayout.
         super.onCreate(savedState)
 
         super.setContentView(R.layout.content_main)
-
-        super.setSupportActionBar(toolbar)
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -56,7 +58,14 @@ class FeedActivity : AppCompatActivity(), FeedContract.View, SwipeRefreshLayout.
             }
         })
         // set adapter on view
-        adapter = FeedAdapter()
+        adapter = FeedAdapter(View.OnClickListener {
+            val ctx = it?.context
+            val name = Pair.create<View, String>(it?.name, "name")
+            val avatar = Pair.create<View, String>(it?.avatar, "avatar")
+            val intent = Intent(ctx, DetailActivity::class.java)
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, name, avatar)
+            ctx?.startActivity(intent.putExtra("user", it.tag as Parcelable), options.toBundle())
+        })
         recycler.adapter = adapter
         // listen for refresh swipes
         swipe_refresh.setOnRefreshListener(this)
