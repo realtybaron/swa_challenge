@@ -1,6 +1,7 @@
 package com.socotech.swa
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
@@ -60,11 +61,16 @@ class FeedActivity : AppCompatActivity(), FeedContract.View, SwipeRefreshLayout.
         // set adapter on view
         adapter = FeedAdapter(View.OnClickListener {
             val ctx = it?.context
-            val name = Pair.create<View, String>(it?.name, "name")
-            val avatar = Pair.create<View, String>(it?.avatar, "avatar")
-            val intent = Intent(ctx, DetailActivity::class.java)
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, name, avatar)
-            ctx?.startActivity(intent.putExtra("user", it.tag as Parcelable), options.toBundle())
+            val intent = Intent(ctx, DetailActivity::class.java).putExtra("user", it.tag as Parcelable)
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                ctx?.startActivity(intent)
+            } else {
+                val name = Pair.create<View, String>(it?.name, "name")
+                val avatar = Pair.create<View, String>(it?.avatar, "avatar")
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, name, avatar)
+                ctx?.startActivity(intent, options.toBundle())
+            }
+
         })
         recycler.adapter = adapter
         // listen for refresh swipes
@@ -91,11 +97,11 @@ class FeedActivity : AppCompatActivity(), FeedContract.View, SwipeRefreshLayout.
     }
 
     override fun onError(t: Throwable) {
-        Snackbar.make(recycler, t.localizedMessage, Snackbar.LENGTH_LONG).setAction("Action", null).show()
+        Snackbar.make(recycler, t.localizedMessage, Snackbar.LENGTH_LONG).show()
     }
 
     override fun onLoadingFailure(t: String) {
-        Snackbar.make(recycler, t, Snackbar.LENGTH_LONG).setAction("Action", null).show()
+        Snackbar.make(recycler, t, Snackbar.LENGTH_LONG).show()
     }
 
     override fun setLoadingIndicator(t: Boolean) {
