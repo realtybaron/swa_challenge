@@ -20,7 +20,10 @@ class RxFeedPresenter(view: FeedContract.View, endpoints: RandomUserApi, schedul
 
     override fun fetchFeed(page: Int, results: Int) {
         val obs = endpoints.get("us", page, "swa_challenge", results).singleOrError()
-            .delay(1, TimeUnit.SECONDS) // app is too fast. slow it down to allow progress indicator to show.
+            .delay(
+                1,
+                TimeUnit.SECONDS
+            ) // slow down to allow progress indicator to show. **WARNING: THIS CAUSES FeedPresenterTest TO FAIL**
             .observeOn(scheduler.ui())
             .subscribeOn(scheduler.io())
             .retryWhen(SingleRetry(10, 1000))
