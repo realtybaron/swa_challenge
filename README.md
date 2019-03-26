@@ -1,10 +1,10 @@
 # 3rd Parties
-# [Dagger](https://google.github.io/dagger/)
-# [RxJava](https://github.com/ReactiveX/RxJava)
-# [Klaxon](https://github.com/cbeust/klaxon)
-# [Picasso](https://square.github.io/picasso/)
-# [Retrofit](https://square.github.io/retrofit/)
-# [Mockito](https://site.mockito.org/)
+* [Dagger](https://google.github.io/dagger/)
+* [RxJava](https://github.com/ReactiveX/RxJava)
+* [Klaxon](https://github.com/cbeust/klaxon)
+* [Picasso](https://square.github.io/picasso/)
+* [Retrofit](https://square.github.io/retrofit/)
+* [Mockito](https://site.mockito.org/)
 
 # Dependencies
 * For a full list of dependencies, execute ```./gradlew :app:dependencies``` from the root directory
