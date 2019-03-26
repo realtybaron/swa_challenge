@@ -62,9 +62,13 @@ class FeedAdapter(onclick: View.OnClickListener) : RecyclerView.Adapter<Recycler
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ResultViewHolder) {
             val result = results[position]
+            val city = result.location.city
+            val state = result.location.state
             val lastName = result.name.last
             val firstName = result.name.first
+            holder.age?.text = result.dob.age.toString()
             holder.name?.text = "$firstName $lastName"
+            holder.location?.text = "$city, $state"
             holder.itemView.tag = result
             Picasso.get().load(result.picture.large).transform(CircleTransformation()).into(holder.avatar)
         } else if (holder is FooterViewHolder) {
@@ -81,8 +85,10 @@ class FeedAdapter(onclick: View.OnClickListener) : RecyclerView.Adapter<Recycler
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     class ResultViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+        var age: TextView? = v.findViewById(R.id.age)
         var name: TextView? = v.findViewById(R.id.name)
         var avatar: ImageView? = v.findViewById(R.id.avatar)
+        var location: TextView? = v.findViewById(R.id.location)
     }
 
     class FooterViewHolder(v: View) : RecyclerView.ViewHolder(v)

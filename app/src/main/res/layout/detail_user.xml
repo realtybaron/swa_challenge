@@ -16,7 +16,7 @@
                   android:orientation="vertical"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
-                  android:layout_marginTop="50dp">
+                  android:layout_marginTop="75dp">
 
         <LinearLayout android:gravity="center_horizontal"
                       android:orientation="vertical"
@@ -53,8 +53,8 @@
     </LinearLayout>
 
     <ImageView android:id="@+id/avatar"
-               android:layout_width="100dp"
-               android:layout_height="100dp"
+               android:layout_width="125dp"
+               android:layout_height="125dp"
                android:layout_centerHorizontal="true"
                android:transitionName="avatar"/>
 

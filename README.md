@@ -1,3 +1,10 @@
+# 3rd Parties
+# [Dagger](https://google.github.io/dagger/)
+# [RxJava](https://github.com/ReactiveX/RxJava)
+# [Klaxon](https://github.com/cbeust/klaxon)
+# [Picasso](https://square.github.io/picasso/)
+# [Retrofit](https://square.github.io/retrofit/)
+# [Mockito](https://site.mockito.org/)
 
 # Dependencies
 * For a full list of dependencies, execute ```./gradlew :app:dependencies``` from the root directory
@@ -27,17 +34,17 @@
 * If you already have the SDK installed, you may want to update it like so: ```~/android/tools/android update sdk --no-ui```
 
 # Clone the Repo
-* ```cd directory_where_you_keep_code``` and ```git clone https://github.com/teamzig/zig-android.git```
+* ```cd directory_where_you_keep_code``` and ```git clone https://github.com/realtybaron/swa_challenge.git```
 
 # Run Unit Tests
-* ```cd Zig```
+* ```cd swa_challenge```
 * ```./gradlew connectedCheck```
 
 # Build and Install the APK on a device
-* ```cd Zig```
+* ```cd swa_challenge```
 * ```./gradlew clean installProductionDebug```
 
 # Build for Distribution to the PlayStore
-* ```cd Zig```
+* ```cd swa_challenge```
 * ```./gradlew clean assembleRelease```
 * If successful, APK can then be found in ```./app/build/outputs/apk/production/release/app-production-release.apk```
