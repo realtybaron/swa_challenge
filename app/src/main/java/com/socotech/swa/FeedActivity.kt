@@ -79,6 +79,7 @@ class FeedActivity : AppCompatActivity(), FeedContract.View, SwipeRefreshLayout.
         presenter.fetchFeed(page++, maxResults)
     }
 
+    // called by presenter when fetch succeeds
     override fun onFetch(t: RandomUsers?) {
         if (t != null) {
             // add results to adapter
@@ -96,14 +97,17 @@ class FeedActivity : AppCompatActivity(), FeedContract.View, SwipeRefreshLayout.
         swipe_refresh.isRefreshing = false
     }
 
+    // called by presenter when error occurs
     override fun onError(t: Throwable) {
         Snackbar.make(recycler, t.localizedMessage, Snackbar.LENGTH_LONG).show()
     }
 
+    // called by presenter when loading fails
     override fun onLoadingFailure(t: String) {
         Snackbar.make(recycler, t, Snackbar.LENGTH_LONG).show()
     }
 
+    // called by presenter when loading
     override fun setLoadingIndicator(t: Boolean) {
         if (!t) {
             progress.visibility = View.GONE
@@ -112,6 +116,7 @@ class FeedActivity : AppCompatActivity(), FeedContract.View, SwipeRefreshLayout.
         }
     }
 
+    // called when user pulls to refresh
     override fun onRefresh() {
         page = 1
         adapter.clear()

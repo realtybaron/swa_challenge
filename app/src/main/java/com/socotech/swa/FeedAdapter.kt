@@ -11,9 +11,8 @@ import com.socotech.swa.util.CircleTransformation
 import com.squareup.picasso.Picasso
 
 
-class FeedAdapter(onclick: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FeedAdapter(private var onclick: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var onclick = onclick
     private var results: ArrayList<RandomUser> = ArrayList()
 
     fun add(t: RandomUser) {
