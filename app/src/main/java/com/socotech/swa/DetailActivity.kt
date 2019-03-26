@@ -19,6 +19,16 @@ class DetailActivity : AppCompatActivity() {
         val lastName = result.name.last
         val firstName = result.name.first
         name?.text = "$firstName $lastName"
+        // set email
+        email?.text = result.email
+        // set phone
+        phone?.text = result.phone
+        // set location
+        street?.text = result.location.street
+        val city = result.location.city
+        val state = result.location.state
+        val postcode = result.location.postcode
+        city_state_zip?.text = "$city, $state $postcode"
         // set avatar
         Picasso.get().load(result.picture.large).transform(CircleTransformation()).into(avatar)
     }
