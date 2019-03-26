@@ -42,9 +42,4 @@
 
 # Build and Install the APK on a device
 * ```cd swa_challenge```
-* ```./gradlew clean installProductionDebug```
-
-# Build for Distribution to the PlayStore
-* ```cd swa_challenge```
-* ```./gradlew clean assembleRelease```
-* If successful, APK can then be found in ```./app/build/outputs/apk/production/release/app-production-release.apk```
+* ```./gradlew clean installDebug```
