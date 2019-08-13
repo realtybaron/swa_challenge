@@ -65,7 +65,6 @@ class FeedAdapter(private var onclick: View.OnClickListener) : RecyclerView.Adap
             val state = result.location.state
             val lastName = result.name.last
             val firstName = result.name.first
-            holder.age?.text = result.dob.age.toString()
             holder.name?.text = "$firstName $lastName"
             holder.location?.text = "$city, $state"
             holder.itemView.tag = result
@@ -84,7 +83,6 @@ class FeedAdapter(private var onclick: View.OnClickListener) : RecyclerView.Adap
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     class ResultViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        var age: TextView? = v.findViewById(R.id.age)
         var name: TextView? = v.findViewById(R.id.name)
         var avatar: ImageView? = v.findViewById(R.id.avatar)
         var location: TextView? = v.findViewById(R.id.location)

@@ -22,6 +22,7 @@ class DetailActivity : AppCompatActivity() {
         // set email
         email?.text = result.email
         // set phone
+        cell?.text = result.cell
         phone?.text = result.phone
         // set location
         street?.text = result.location.street
@@ -31,6 +32,9 @@ class DetailActivity : AppCompatActivity() {
         city_state_zip?.text = "$city, $state $postcode"
         // set avatar
         Picasso.get().load(result.picture.large).transform(CircleTransformation()).into(avatar)
+        // set map image
+        val mapUrl = super.getResources().getString(R.string.google_map_url, "$city, $state", "$city, $state")
+        Picasso.get().load(mapUrl).placeholder(R.drawable.ic_map).into(map)
     }
 
 }
