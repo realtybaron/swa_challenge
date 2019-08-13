@@ -25,6 +25,6 @@ class AndroidModule(private val app: Application) {
     @Provides
     @Singleton
     fun provideSharedPreferences(context: Context): SharedPreferences {
-        return context.getSharedPreferences("youworth-remote-ok", Context.MODE_PRIVATE)
+        return context.getSharedPreferences("template-android-app", Context.MODE_PRIVATE)
     }
 }
