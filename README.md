@@ -41,5 +41,5 @@
 * ```./gradlew connectedCheck```
 
 # Build and Install the APK on a device
-* ```cd swa_challenge```
+* ```cd template-android-app```
 * ```./gradlew clean installDebug```
