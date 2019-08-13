@@ -1,6 +1,6 @@
-package com.android.mvp
+package com.example.mvp
 
-import com.android.FeedActivity
+import com.example.FeedActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

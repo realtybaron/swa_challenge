@@ -1,5 +1,6 @@
-package com.android.mvp
+package com.example.mvp
 
+import com.android.mvp.SchedulerProvider
 import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Singleton

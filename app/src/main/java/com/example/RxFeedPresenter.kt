@@ -1,11 +1,11 @@
-package com.android
+package com.example
 
-import com.android.FeedContract.Presenter
-import com.android.mvp.BasePresenter
-import com.android.mvp.SchedulerProvider
-import com.android.mvp.SingleRetry
-import com.android.net.RandomUserApi
-import com.android.net.RandomUsers
+import com.example.FeedContract.Presenter
+import com.example.mvp.BasePresenter
+import com.example.mvp.SchedulerProvider
+import com.example.mvp.SingleRetry
+import com.example.net.RandomUserApi
+import com.example.net.RandomUsers
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 import retrofit2.Response

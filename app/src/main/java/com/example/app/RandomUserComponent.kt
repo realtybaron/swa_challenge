@@ -1,7 +1,7 @@
-package com.android.app
+package com.example.app
 
-import com.android.mvp.BuildersModule
-import com.android.net.NetModule
+import com.example.mvp.BuildersModule
+import com.example.net.NetModule
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule

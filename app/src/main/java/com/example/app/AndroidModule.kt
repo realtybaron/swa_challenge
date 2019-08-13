@@ -1,10 +1,10 @@
-package com.android.app
+package com.example.app
 
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.android.mvp.AndroidSchedulerProvider
-import com.android.mvp.SchedulerProvider
+import com.example.mvp.AndroidSchedulerProvider
+import com.example.mvp.SchedulerProvider
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

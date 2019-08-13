@@ -1,4 +1,4 @@
-package com.android.net
+package com.example.net
 
 import io.reactivex.Observable
 import retrofit2.Response

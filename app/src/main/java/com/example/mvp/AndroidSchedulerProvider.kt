@@ -1,4 +1,4 @@
-package com.android.mvp
+package com.example.mvp
 
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers

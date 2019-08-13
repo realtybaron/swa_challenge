@@ -1,4 +1,4 @@
-package com.android
+package com.example
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,15 +6,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.android.net.RandomUser
-import com.android.util.CircleTransformation
+import com.example.net.RandomUser
+import com.example.util.CircleTransformation
 import com.socotech.swa.R
 import com.squareup.picasso.Picasso
 
 
-class FeedAdapter(private var onclick: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+class FeedAdapter(
+    private var onclick: View.OnClickListener,
     private var results: ArrayList<RandomUser> = ArrayList()
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun add(t: RandomUser) {
         results.add(t)

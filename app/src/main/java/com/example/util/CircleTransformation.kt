@@ -1,4 +1,4 @@
-package com.android.util
+package com.example.util
 
 import android.graphics.*
 import com.squareup.picasso.Transformation

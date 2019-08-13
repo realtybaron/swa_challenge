@@ -1,4 +1,4 @@
-package com.android.net
+package com.example.net
 
 // To parse the JSON, install Klaxon and do:
 //

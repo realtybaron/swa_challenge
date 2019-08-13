@@ -1,11 +1,12 @@
-package com.android
+package com.example
 
 import com.android.FeedContract.View
-import com.android.mvp.UnitTestSchedulerProvider
+import com.android.RxFeedPresenter
 import com.android.net.Info
 import com.android.net.RandomUser
 import com.android.net.RandomUserApi
 import com.android.net.RandomUsers
+import com.example.mvp.UnitTestSchedulerProvider
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test

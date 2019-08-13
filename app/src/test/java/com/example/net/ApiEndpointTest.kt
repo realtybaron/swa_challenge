@@ -1,6 +1,8 @@
-package com.android.net
+package com.example.net
 
-import com.android.mvp.UnitTestSchedulerProvider
+import com.android.net.NetModule
+import com.android.net.RandomUserApi
+import com.example.mvp.UnitTestSchedulerProvider
 import org.junit.Before
 import org.junit.Test
 

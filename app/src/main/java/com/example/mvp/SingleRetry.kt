@@ -1,4 +1,4 @@
-package com.android.mvp
+package com.example.mvp
 
 import io.reactivex.Flowable
 import io.reactivex.functions.Function

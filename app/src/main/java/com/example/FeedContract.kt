@@ -1,6 +1,6 @@
-package com.android
+package com.example
 
-import com.android.net.RandomUsers
+import com.example.net.RandomUsers
 
 interface FeedContract {
 

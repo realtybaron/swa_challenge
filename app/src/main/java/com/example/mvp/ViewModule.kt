@@ -1,7 +1,7 @@
-package com.android.mvp
+package com.example.mvp
 
-import com.android.FeedActivity
-import com.android.FeedContract
+import com.example.FeedActivity
+import com.example.FeedContract
 import dagger.Binds
 import dagger.Module
 

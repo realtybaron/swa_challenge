@@ -1,9 +1,9 @@
-package com.android
+package com.example
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.android.net.RandomUser
-import com.android.util.CircleTransformation
+import com.example.net.RandomUser
+import com.example.util.CircleTransformation
 import com.socotech.swa.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.detail_user.*

@@ -1,4 +1,4 @@
-package com.android.app
+package com.example.app
 
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication

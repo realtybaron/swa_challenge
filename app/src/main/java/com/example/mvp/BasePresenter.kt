@@ -1,4 +1,4 @@
-package com.android.mvp
+package com.example.mvp
 
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable

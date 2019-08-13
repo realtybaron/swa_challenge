@@ -1,8 +1,8 @@
-package com.android.mvp
+package com.example.mvp
 
-import com.android.FeedContract
-import com.android.RxFeedPresenter
-import com.android.net.RandomUserApi
+import com.example.FeedContract
+import com.example.RxFeedPresenter
+import com.example.net.RandomUserApi
 import dagger.Module
 import dagger.Provides
 

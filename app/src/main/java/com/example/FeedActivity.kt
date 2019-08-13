@@ -1,4 +1,4 @@
-package com.android
+package com.example
 
 import android.content.Intent
 import android.os.Build
@@ -12,14 +12,13 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.android.net.RandomUsers
+import com.example.net.RandomUsers
 import com.google.android.material.snackbar.Snackbar
 import com.socotech.swa.R
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.list_item.view.*
 import javax.inject.Inject
-
 
 class FeedActivity : AppCompatActivity(), FeedContract.View, SwipeRefreshLayout.OnRefreshListener {
 
@@ -62,7 +61,7 @@ class FeedActivity : AppCompatActivity(), FeedContract.View, SwipeRefreshLayout.
         // set adapter on view
         adapter = FeedAdapter(View.OnClickListener {
             val ctx = it?.context
-            val intent = Intent(ctx, DetailActivity::class.java).putExtra("user", it.tag as Parcelable)
+            val intent = Intent(ctx, com.example.DetailActivity::class.java).putExtra("user", it.tag as Parcelable)
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                 ctx?.startActivity(intent)
             } else {
