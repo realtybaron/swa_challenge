@@ -34,10 +34,10 @@
 * If you already have the SDK installed, you may want to update it like so: ```~/android/tools/android update sdk --no-ui```
 
 # Clone the Repo
-* ```cd directory_where_you_keep_code``` and ```git clone https://github.com/realtybaron/swa_challenge.git```
+* ```cd directory_where_you_keep_code``` and ```git clone https://github.com/realtybaron/template-android-app.git```
 
 # Run Unit Tests
-* ```cd swa_challenge```
+* ```cd template-android-app```
 * ```./gradlew connectedCheck```
 
 # Build and Install the APK on a device

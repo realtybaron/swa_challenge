@@ -19,7 +19,7 @@ class RxFeedPresenter(view: FeedContract.View, endpoints: RandomUserApi, schedul
     private var scheduler = scheduler
 
     override fun fetchFeed(page: Int, results: Int) {
-        val obs = endpoints.get("us", page, "swa_challenge", results).singleOrError()
+        val obs = endpoints.get("us", page, "template-android-app", results).singleOrError()
             .delay(
                 1,
                 TimeUnit.SECONDS

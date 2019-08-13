@@ -43,7 +43,7 @@ class FeedPresenterTest {
     @Test
     @Throws(Exception::class)
     fun testGetConfig() {
-        val info = Info(1, "swa_challenge", 10, "")
+        val info = Info(1, "template-android-app", 10, "")
         val list = ArrayList<RandomUser>()
         val body = RandomUsers(info, list)
         val response = Response.success(body)

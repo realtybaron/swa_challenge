@@ -1,7 +1,5 @@
 package com.example.net
 
-import com.android.net.NetModule
-import com.android.net.RandomUserApi
 import com.example.mvp.UnitTestSchedulerProvider
 import org.junit.Before
 import org.junit.Test
@@ -22,7 +20,7 @@ class ApiEndpointTest {
 
     @Test
     fun testGet() {
-        val observable = randomUserApi.get("us", 1, "swa_challenge", 100).test()
+        val observable = randomUserApi.get("us", 1, "template-android-app", 100).test()
         observable.assertNoErrors()
     }
 
