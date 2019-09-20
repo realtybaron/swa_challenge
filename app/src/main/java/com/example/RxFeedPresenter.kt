@@ -9,6 +9,7 @@ import com.example.net.RandomUsers
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 import retrofit2.Response
+import java.util.concurrent.TimeUnit
 
 class RxFeedPresenter(
     view: FeedContract.View,
@@ -21,6 +22,7 @@ class RxFeedPresenter(
 
     override fun fetchFeed(page: Int, results: Int) {
         val obs = endpoints.get("us", page, "template-android-app", results).singleOrError()
+            .delay(1, TimeUnit.SECONDS)
             .observeOn(scheduler.ui())
             .subscribeOn(scheduler.io())
             .retryWhen(SingleRetry(10, 1000))

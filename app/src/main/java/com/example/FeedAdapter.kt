@@ -8,9 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.net.RandomUser
 import com.example.util.CircleTransformation
-import com.socotech.swa.R
 import com.squareup.picasso.Picasso
-
 
 class FeedAdapter(
     private var onclick: View.OnClickListener,

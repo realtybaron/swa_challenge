@@ -8,26 +8,30 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.net.RandomUsers
 import com.google.android.material.snackbar.Snackbar
-import com.socotech.swa.R
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.list_item.view.*
 import javax.inject.Inject
 
-class FeedActivity : AppCompatActivity(), FeedContract.View, SwipeRefreshLayout.OnRefreshListener {
+class FeedActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
     private var page = 1
     private var maxResults = 10
     private lateinit var adapter: FeedAdapter
+    private lateinit var viewModel: FeedViewModel
 
     @Inject
     lateinit var presenter: FeedContract.Presenter
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreate(savedState: Bundle?) {
         // first inject...
@@ -37,13 +41,67 @@ class FeedActivity : AppCompatActivity(), FeedContract.View, SwipeRefreshLayout.
 
         super.setContentView(R.layout.content_main)
 
+        // get view model
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(FeedViewModel::class.java)
+        // observe view model
+        viewModel.state.observe(this, Observer {
+            it?.let {
+                when (it) {
+                    FeedViewModel.State.DidFail -> {
+                        // hide progress
+                        progress.visibility = View.GONE
+                        // show snack bar
+                        Snackbar.make(recycler, viewModel.fail!!, Snackbar.LENGTH_LONG).show()
+                    }
+                    FeedViewModel.State.DidLoad -> {
+                        // hide progress
+                        progress.visibility = View.GONE
+                        // add results to adapter
+                        for (result in viewModel.randomUsers) {
+                            adapter.add(result)
+                        }
+                        // got items to show?
+                        if (adapter.itemCount != 0) {
+                            empty.visibility = View.GONE
+                            adapter.notifyDataSetChanged()
+                        } else {
+                            empty.visibility = View.VISIBLE
+                        }
+                        swipe_refresh.isRefreshing = false
+                    }
+                    FeedViewModel.State.DidError -> {
+                        // hide progress
+                        progress.visibility = View.GONE
+                        // show snack bar
+                        Snackbar.make(
+                            recycler,
+                            viewModel.error!!.localizedMessage,
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                    FeedViewModel.State.WillLoad -> {
+                        if (!adapter.isEmpty()) {
+                            progress.visibility = View.GONE
+                        } else {
+                            progress.visibility = View.VISIBLE
+                        }
+                    }
+                }
+            }
+        })
+
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recycler.setHasFixedSize(true)
 
         // use a linear layout manager
         val layoutManager = recycler.layoutManager as LinearLayoutManager
-        recycler.addItemDecoration(DividerItemDecoration(recycler.context, layoutManager.orientation))
+        recycler.addItemDecoration(
+            DividerItemDecoration(
+                recycler.context,
+                layoutManager.orientation
+            )
+        )
         // listen for scrolling
         recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(view: RecyclerView, dx: Int, dy: Int) {
@@ -61,7 +119,10 @@ class FeedActivity : AppCompatActivity(), FeedContract.View, SwipeRefreshLayout.
         // set adapter on view
         adapter = FeedAdapter(View.OnClickListener {
             val ctx = it?.context
-            val intent = Intent(ctx, com.example.DetailActivity::class.java).putExtra("user", it.tag as Parcelable)
+            val intent = Intent(ctx, com.example.DetailActivity::class.java).putExtra(
+                "user",
+                it.tag as Parcelable
+            )
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                 ctx?.startActivity(intent)
             } else {
@@ -75,44 +136,13 @@ class FeedActivity : AppCompatActivity(), FeedContract.View, SwipeRefreshLayout.
         recycler.adapter = adapter
         // listen for refresh swipes
         swipe_refresh.setOnRefreshListener(this)
-        // fetch
-        presenter.fetchFeed(page++, maxResults)
     }
 
-    // called by presenter when fetch succeeds
-    override fun onFetch(t: RandomUsers?) {
-        if (t != null) {
-            // add results to adapter
-            for (result in t.results) {
-                adapter.add(result)
-            }
-            // got items to show?
-            if (adapter.itemCount != 0) {
-                empty.visibility = View.GONE
-                adapter.notifyDataSetChanged()
-            } else {
-                empty.visibility = View.VISIBLE
-            }
-        }
-        swipe_refresh.isRefreshing = false
-    }
-
-    // called by presenter when error occurs
-    override fun onError(t: Throwable) {
-        Snackbar.make(recycler, t.localizedMessage, Snackbar.LENGTH_LONG).show()
-    }
-
-    // called by presenter when loading fails
-    override fun onLoadingFailure(t: String) {
-        Snackbar.make(recycler, t, Snackbar.LENGTH_LONG).show()
-    }
-
-    // called by presenter when loading
-    override fun setLoadingIndicator(t: Boolean) {
-        if (!t) {
-            progress.visibility = View.GONE
-        } else if (adapter.isEmpty()) {
-            progress.visibility = View.VISIBLE
+    override fun onResume() {
+        super.onResume()
+        // fetch?
+        if (adapter.isEmpty()) {
+            presenter.fetchFeed(page++, maxResults)
         }
     }
 
